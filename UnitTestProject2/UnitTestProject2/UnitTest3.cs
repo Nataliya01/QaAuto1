@@ -12,7 +12,7 @@ using OpenQA.Selenium.Support.UI;
 using OpenQA.Selenium.Interactions;
 using NUnit.Framework;
 [TestFixture]
-public class ProfileTest
+public class AddcarTest
 {
     private IWebDriver driver;
     public IDictionary<string, object> vars { get; private set; }
@@ -30,13 +30,20 @@ public class ProfileTest
         driver.Quit();
     }
     [Test]
-    public void profile()
+    public void addcar()
     {
         driver.Navigate().GoToUrl("https://qauto.forstudy.space/panel/garage");
         driver.Manage().Window.Size = new System.Drawing.Size(1050, 840);
-        driver.FindElement(By.Id("userNavDropdown")).Click();
-        driver.FindElement(By.LinkText("Profile")).Click();
         driver.FindElement(By.CssSelector(".btn-primary")).Click();
+        driver.FindElement(By.Id("addCarBrand")).Click();
+        driver.FindElement(By.Id("addCarModel")).Click();
+        {
+            var dropdown = driver.FindElement(By.Id("addCarModel"));
+            dropdown.FindElement(By.XPath("//option[. = 'R8']")).Click();
+        }
+        driver.FindElement(By.Id("addCarMileage")).Click();
+        driver.FindElement(By.Id("addCarMileage")).SendKeys("11");
+        driver.FindElement(By.CssSelector(".modal-footer > .btn-primary")).Click();
     }
 }
 using System;
@@ -45,7 +52,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace UnitTestProject2
 {
     [TestClass]
-    public class UnitTest2
+    public class UnitTest3
     {
         [TestMethod]
         public void TestMethod1()

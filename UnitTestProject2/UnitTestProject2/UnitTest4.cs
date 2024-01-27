@@ -12,7 +12,7 @@ using OpenQA.Selenium.Support.UI;
 using OpenQA.Selenium.Interactions;
 using NUnit.Framework;
 [TestFixture]
-public class ProfileTest
+public class AddexpensesTest
 {
     private IWebDriver driver;
     public IDictionary<string, object> vars { get; private set; }
@@ -30,13 +30,25 @@ public class ProfileTest
         driver.Quit();
     }
     [Test]
-    public void profile()
+    public void addexpenses()
     {
         driver.Navigate().GoToUrl("https://qauto.forstudy.space/panel/garage");
         driver.Manage().Window.Size = new System.Drawing.Size(1050, 840);
-        driver.FindElement(By.Id("userNavDropdown")).Click();
-        driver.FindElement(By.LinkText("Profile")).Click();
-        driver.FindElement(By.CssSelector(".btn-primary")).Click();
+        driver.FindElement(By.CssSelector(".car_add-expense")).Click();
+        driver.FindElement(By.Id("addExpenseLiters")).Click();
+        driver.FindElement(By.Id("addExpenseLiters")).SendKeys("101");
+        driver.FindElement(By.Id("addExpenseTotalCost")).Click();
+        driver.FindElement(By.Id("addExpenseTotalCost")).SendKeys("113");
+        driver.FindElement(By.Id("addExpenseMileage")).Click();
+        driver.FindElement(By.Id("addExpenseMileage")).Click();
+        {
+            var element = driver.FindElement(By.Id("addExpenseMileage"));
+            Actions builder = new Actions(driver);
+            builder.DoubleClick(element).Perform();
+        }
+        driver.FindElement(By.Id("addExpenseMileage")).Click();
+        driver.FindElement(By.Id("addExpenseMileage")).SendKeys("20");
+        driver.FindElement(By.CssSelector(".modal-footer > .btn-primary")).Click();
     }
 }
 using System;
@@ -45,7 +57,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace UnitTestProject2
 {
     [TestClass]
-    public class UnitTest2
+    public class UnitTest4
     {
         [TestMethod]
         public void TestMethod1()

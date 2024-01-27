@@ -12,7 +12,7 @@ using OpenQA.Selenium.Support.UI;
 using OpenQA.Selenium.Interactions;
 using NUnit.Framework;
 [TestFixture]
-public class ProfileTest
+public class DeleteaccountTest
 {
     private IWebDriver driver;
     public IDictionary<string, object> vars { get; private set; }
@@ -30,13 +30,16 @@ public class ProfileTest
         driver.Quit();
     }
     [Test]
-    public void profile()
+    public void deleteaccount()
     {
         driver.Navigate().GoToUrl("https://qauto.forstudy.space/panel/garage");
         driver.Manage().Window.Size = new System.Drawing.Size(1050, 840);
         driver.FindElement(By.Id("userNavDropdown")).Click();
-        driver.FindElement(By.LinkText("Profile")).Click();
-        driver.FindElement(By.CssSelector(".btn-primary")).Click();
+        driver.FindElement(By.CssSelector(".sidebar_btn-group > .btn:nth-child(2)")).Click();
+        driver.FindElement(By.Id("emailChangeEmail")).SendKeys("hhhh@i.ua");
+        driver.FindElement(By.Id("emailChangePassword")).SendKeys("Nataly.m01");
+        driver.FindElement(By.CssSelector(".btn-danger-bg")).Click();
+        driver.FindElement(By.CssSelector(".btn-danger")).Click();
     }
 }
 using System;
@@ -45,7 +48,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace UnitTestProject2
 {
     [TestClass]
-    public class UnitTest2
+    public class UnitTest5
     {
         [TestMethod]
         public void TestMethod1()
